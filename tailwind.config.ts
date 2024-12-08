@@ -8,6 +8,13 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      letterSpacing : {
+        "3pct" : '3%'
+      },
+      fontFamily : {
+        poppins : ["poppins","sans-serif"],
+        inter : ["inter", "sans-serif"],
+      },
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
