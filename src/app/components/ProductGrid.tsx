@@ -49,7 +49,7 @@ const ProductGrid = () => {
       image: "/pic11.png",
     },
   ];
-// Top Picks For you
+  // Top Picks For you
   return (
     <div>
       <div className="w-full h-auto bg-white py-12">
@@ -72,9 +72,11 @@ const ProductGrid = () => {
                 key={product.id}
                 className="bg-white shadow-lg rounded-lg overflow-hidden cursor-pointer transition-transform hover:scale-105"
               >
-                <img
+                <Image
                   src={product.image}
                   alt={product.name}
+                  width={300}
+                  height={48}
                   className="w-full h-48 lg:h-64 object-cover"
                 />
                 <div className="p-4">
@@ -97,9 +99,9 @@ const ProductGrid = () => {
           </p>
         </div>
       </div>
-            {/* new arrivals */}
+      {/* new arrivals */}
 
-            <div className="bg-[#FFF9E5] w-full h-auto py-10">
+      <div className="bg-[#FFF9E5] w-full h-auto py-10">
         <div className="flex flex-col lg:flex-row items-center lg:items-start lg:justify-center">
           {/* Image Section */}
           <div className="w-full lg:w-1/2 flex justify-center">
@@ -132,9 +134,9 @@ const ProductGrid = () => {
           </div>
         </div>
       </div>
-            {/* our blog  */}
+      {/* our blog  */}
 
-            <div className="w-full h-auto bg-white py-12">
+      <div className="w-full h-auto bg-white py-12">
         {/* Heading Section */}
         <div className="flex flex-col items-center text-center px-4">
           <p className="font-medium text-[28px] sm:text-[36px] md:text-[40px] leading-[36px] sm:leading-[54px]">
@@ -153,11 +155,12 @@ const ProductGrid = () => {
                 key={product.id}
                 className="bg-white shadow-lg rounded-lg overflow-hidden cursor-pointer transition-transform hover:scale-105"
               >
-                <img
-                  src={product.image}
-                  alt={product.name}
-                  className="w-full h-[200px] sm:h-[250px] object-cover"
-                />
+                <Image 
+                src={product.image}
+                alt={product.name}
+                width={300}
+                height={200}
+                className="w-full sm:h-[250px] object-cover"/>
                 <div className="p-4">
                   <h3 className="text-lg font-semibold text-gray-900">
                     {product.name}
@@ -171,14 +174,17 @@ const ProductGrid = () => {
 
         {/* View All Posts */}
         <div className="flex justify-center mt-12">
-          <Link href={"/Blog"} className="underline underline-offset-8 cursor-pointer font-medium text-[16px] sm:text-[20px] transition-transform hover:scale-105 hover:text-gray-700">
+          <Link
+            href={"/Blog"}
+            className="underline underline-offset-8 cursor-pointer font-medium text-[16px] sm:text-[20px] transition-transform hover:scale-105 hover:text-gray-700"
+          >
             View All Posts
           </Link>
         </div>
       </div>
-            {/* contact to instagram   */}
+      {/* contact to instagram   */}
 
-            <div className="relative w-full h-auto">
+      <div className="relative w-full h-auto">
         {/* Image Section */}
         <div className="w-full h-[450px]">
           <Image

@@ -5,10 +5,11 @@ import { RiAccountCircleLine } from "react-icons/ri";
 import { FiSearch } from "react-icons/fi";
 import { FaRegHeart } from "react-icons/fa6";
 import { IoCartOutline } from "react-icons/io5";
-import { MdCancel, MdFacebook } from "react-icons/md";
+import { MdCancel} from "react-icons/md";
 import { TiThMenu } from "react-icons/ti";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import Image from "next/image";
 
 const Navbar = () => {
   const [isCartOpen, setisCartOpen] = useState(false);
@@ -88,11 +89,12 @@ const Navbar = () => {
             </div>
             <div className="border-b mb-6"></div>
             <div className="flex items-center gap-4 mb-4">
-              <img
-                src="/pic8.png"
-                alt="Product"
-                className="w-16 h-16 bg-[#FBEBB5] rounded-lg object-cover"
-              />
+              <Image 
+              src="/pic8.png"
+              alt="Product"
+              width={16}
+              height={16}
+              className="bg-[#FBEBB5] rounded-lg object-cover"/>
               <div className="flex">
                 <div className="space-y-2">
                   <h3 className="text-sm font-semibold text-black">

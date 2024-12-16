@@ -140,17 +140,22 @@ const Details = () => {
                 } fixed top-0 right-0 bg-white shadow-lg rounded-xl w-[280px] sm:w-[320px] py-4 px-6 z-50`}
               >
                 <div>
-                <p className="font-bold text-[24px] leading-[36px] mb-7 mt-3 flex">
-                Shopping Cart
-                <MdCancel className="text-gray-400 w-[20px] h-[20px] ml-16 cursor-pointer mt-3" onClick={() => setIsOpen(!isOpen)}/>
-              </p>
+                  <p className="font-bold text-[24px] leading-[36px] mb-7 mt-3 flex">
+                    Shopping Cart
+                    <MdCancel
+                      className="text-gray-400 w-[20px] h-[20px] ml-16 cursor-pointer mt-3"
+                      onClick={() => setIsOpen(!isOpen)}
+                    />
+                  </p>
                 </div>
                 <div className="border-b mb-6"></div>
                 <div className="flex items-center gap-4 mb-4">
-                  <img
+                  <Image
                     src="/pic8.png"
                     alt="Product"
-                    className="w-16 h-16 bg-[#FBEBB5] rounded-lg object-cover"
+                    width={16}
+                    height={16}
+                    className="bg-[#FBEBB5] rounded-lg object-cover"
                   />
                   <div className="flex">
                     <div className="space-y-2">

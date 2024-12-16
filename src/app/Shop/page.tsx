@@ -11,7 +11,6 @@ import Button from "../components/Button";
 import { redirect } from "next/navigation";
 
 const page = () => {
-
   const products = [
     {
       id: 1,
@@ -35,86 +34,83 @@ const page = () => {
       id: 4,
       name: "Plain console with teak mirror",
       price: "Rs. 25,000.00",
-      image: "Spic6.png",
+      image: "/Spic6.png",
     },
 
     {
       id: 5,
       name: "Grain coffee table",
       price: "Rs. 25,000.00",
-      image: "Spic7.png",
+      image: "/Spic7.png",
     },
     {
       id: 6,
       name: "Kent coffee table",
       price: "Rs. 25,000.00",
-      image: "Spic8.png",
+      image: "/Spic8.png",
     },
     {
       id: 7,
       name: "Round coffee table_color 2",
       price: "Rs. 25,000.00",
-      image: "Spic9.png",
+      image: "/Spic9.png",
     },
     {
       id: 8,
       name: "Reclaimed teak coffee table",
       price: "Rs. 25,000.00",
-      image: "Spic10.png",
+      image: "/Spic10.png",
     },
     {
       id: 9,
       name: "Plain console_",
       price: "Rs. 25,000.00",
-      image: "Spic11.png",
+      image: "/Spic11.png",
     },
     {
       id: 10,
       name: "Reclaimed teak Sideboard",
       price: "Rs. 25,000.00",
-      image: "Spic12.png",
+      image: "/Spic12.png",
     },
     {
       id: 11,
       name: "SJP_0825 ",
       price: "Rs. 25,000.00",
-      image: "Spic13.png",
+      image: "/Spic13.png",
     },
     {
       id: 12,
       name: "Bella chair and table",
       price: "Rs. 25,000.00",
-      image: "Spic14.png",
+      image: "/Spic14.png",
     },
     {
       id: 13,
       name: "Granite square side table",
       price: "Rs. 25,000.00",
-      image: "Spic15.png",
+      image: "/Spic15.png",
     },
     {
       id: 14,
       name: "Asgaard sofa",
       price: "Rs. 25,000.00",
-      image: "Spic16.png",
+      image: "/Spic16.png",
     },
     {
       id: 15,
       name: "Maya sofa three seater",
       price: "Rs. 25,000.00",
-      image: "Spic17.png",
+      image: "/Spic17.png",
     },
     {
       id: 16,
       name: "Outdoor sofa set",
       price: "Rs. 25,000.00",
-      image: "Spic18.png",
+      image: "/Spic18.png",
     },
   ];
-
-  // @ts-expect-error
-  if(products === Number ) redirect("/ProductDetails")
-
+  if (typeof products === "number") redirect("/ProductDetails");
   return (
     <>
       <div className="relative">
@@ -194,13 +190,16 @@ const page = () => {
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
               {products.map((product) => (
                 <Link
-                  key={product.id} href={`${product.id}`}
+                  key={product.id}
+                  href={`${product.id}`}
                   className="bg-white shadow-lg rounded-lg overflow-hidden cursor-pointer transition-transform hover:scale-105"
                 >
-                  <img
+                  <Image
                     src={product.image}
                     alt={product.name}
-                    className="w-full h-48 object-cover"
+                    width={300}
+                    height={48}
+                    className="cover"
                   />
                   <div className="p-4">
                     <h3 className="text-lg font-semibold text-gray-900">

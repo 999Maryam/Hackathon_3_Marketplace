@@ -1,5 +1,6 @@
 import { FC } from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 const Hero: FC = () => {
   return (
@@ -19,10 +20,12 @@ const Hero: FC = () => {
         </div>
         {/* Right Image */}
         <div className="w-full lg:w-1/2 flex justify-center lg:justify-end mt-8 lg:mt-0">
-          <img
-            src="/sofa.png"
-            alt="Rocket Single Seater"
-            className="w-full max-w-sm sm:max-w-md md:max-w-lg drop-shadow-lg"
+          <Image 
+          src="/sofa.png"
+          alt="Rocket Single Seater"
+          width={853}
+          height={1000}
+          className="w-full max-w-sm sm:max-w-md md:max-w-lg drop-shadow-lg"
           />
         </div>
       </div>
