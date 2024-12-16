@@ -1,5 +1,7 @@
-import Image from 'next/image';
-
+"use client";
+import React from "react";
+import Image from "next/image";
+import Link from "next/link";
 const ProductGrid = () => {
   const products = [
     {
@@ -27,37 +29,182 @@ const ProductGrid = () => {
       image: "/console.png",
     },
   ];
-
+  const products2 = [
+    {
+      id: 5,
+      name: "Going all-in with millennial design",
+      price: "Read More",
+      image: "/pic9.png",
+    },
+    {
+      id: 6,
+      name: "Going all-in with millennial design",
+      price: "Read More",
+      image: "/pic10.png",
+    },
+    {
+      id: 7,
+      name: "Going all-in with millennial design",
+      price: "Read More",
+      image: "/pic11.png",
+    },
+  ];
+// Top Picks For you
   return (
-    <div className="px-6 py-12 bg-white">
-      <h2 className="text-2xl font-bold text-center">Top Picks For You</h2>
-      <p className="mt-2 text-gray-500 text-center">
-        Find a bright idea to suit your taste with our great selection of suspension, floor, and table lights.
-      </p>
+    <div>
+      <div className="w-full h-auto bg-white py-12">
+        {/* Text Section */}
+        <div className="flex flex-col items-center text-center px-4 lg:px-8">
+          <p className="font-[500] text-[28px] sm:text-[36px] lg:text-[48px] leading-[40px] sm:leading-[54px] lg:leading-[60px]">
+            Top Picks For You
+          </p>
+          <p className="font-[500] text-[14px] sm:text-[16px] lg:text-[18px] leading-[20px] sm:leading-[24px] lg:leading-[28px] text-[#9F9F9F] mt-5 max-w-2xl">
+            Find a bright ideal to suit your taste with our great selection of
+            suspension, floor, and table lights.
+          </p>
+        </div>
 
-      <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
-        {products.map((product) => (
-          <div key={product.id} className="text-center">
-            <Image
-              src={product.image}
-              alt={product.name}
-              width={200}
-              height={200}
-              className="mx-auto"
-            />
-            <h3 className="mt-4 text-lg font-semibold">{product.name}</h3>
-            <p className="mt-2 text-gray-700">{product.price}</p>
+        {/* Image Grid */}
+        <div className="flex justify-center">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-10 px-4 lg:px-12 max-w-7xl">
+            {products.map((product) => (
+              <div
+                key={product.id}
+                className="bg-white shadow-lg rounded-lg overflow-hidden cursor-pointer transition-transform hover:scale-105"
+              >
+                <img
+                  src={product.image}
+                  alt={product.name}
+                  className="w-full h-48 lg:h-64 object-cover"
+                />
+                <div className="p-4">
+                  <h3 className="text-md sm:text-lg lg:text-xl font-semibold text-gray-900">
+                    {product.name}
+                  </h3>
+                  <p className="text-gray-600 mt-2 text-sm sm:text-base lg:text-lg">
+                    {product.price}
+                  </p>
+                </div>
+              </div>
+            ))}
           </div>
-        ))}
-      </div>
+        </div>
 
-      <div className="mt-8 text-center">
-        <a
-          href="#"
-          className="inline-block px-6 py-2 text-white bg-black rounded hover:bg-gray-800"
-        >
-          View More
-        </a>
+        {/* View More Section */}
+        <div className="flex justify-center mt-16 lg:mt-28">
+          <p className="underline underline-offset-8 cursor-pointer font-[500] text-[14px] sm:text-[16px] lg:text-[18px] transition-transform hover:scale-105 hover:text-gray-700">
+            View More
+          </p>
+        </div>
+      </div>
+            {/* new arrivals */}
+
+            <div className="bg-[#FFF9E5] w-full h-auto py-10">
+        <div className="flex flex-col lg:flex-row items-center lg:items-start lg:justify-center">
+          {/* Image Section */}
+          <div className="w-full lg:w-1/2 flex justify-center">
+            <Image
+              src={"/pic8.png"}
+              alt="pic8"
+              width={983}
+              height={799}
+              className="w-full  object-cover"
+            />
+          </div>
+          {/* Text Section */}
+          <div className="w-full lg:w-1/2 flex flex-col items-center text-center sm:pt-32 mt-6 lg:px-10">
+            <div className="mb-6">
+              <p className="font-[500] text-[24px] leading-[36px]">
+                New Arrivals
+              </p>
+              <p className="font-[700] text-[36px] md:text-[48px] leading-[48px] md:leading-[72px]">
+                Asgaard Sofa
+              </p>
+            </div>
+            <div className="mt-4">
+              <Link
+                href="/Shop/ProductDetails"
+                className="text-[16px] md:text-[20px] leading-[28px] font-[500] text-[#000000] border border-[#9b9b9b] py-3 px-6 inline-block hover:bg-[#faeec7] transition-colors"
+              >
+                Order Now
+              </Link>
+            </div>
+          </div>
+        </div>
+      </div>
+            {/* our blog  */}
+
+            <div className="w-full h-auto bg-white py-12">
+        {/* Heading Section */}
+        <div className="flex flex-col items-center text-center px-4">
+          <p className="font-medium text-[28px] sm:text-[36px] md:text-[40px] leading-[36px] sm:leading-[54px]">
+            Our Blogs
+          </p>
+          <p className="text-gray-500 font-medium text-[14px] sm:text-[16px] leading-[20px] sm:leading-[24px] mt-4 max-w-2xl">
+            Find a bright idea to suit your taste with our great selection.
+          </p>
+        </div>
+
+        {/* Blogs Grid */}
+        <div className="flex justify-center items-center">
+          <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 px-4 md:px-8 max-w-7xl">
+            {products2.map((product) => (
+              <div
+                key={product.id}
+                className="bg-white shadow-lg rounded-lg overflow-hidden cursor-pointer transition-transform hover:scale-105"
+              >
+                <img
+                  src={product.image}
+                  alt={product.name}
+                  className="w-full h-[200px] sm:h-[250px] object-cover"
+                />
+                <div className="p-4">
+                  <h3 className="text-lg font-semibold text-gray-900">
+                    {product.name}
+                  </h3>
+                  <p className="text-gray-600 mt-2">{product.price}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* View All Posts */}
+        <div className="flex justify-center mt-12">
+          <Link href={"/Blog"} className="underline underline-offset-8 cursor-pointer font-medium text-[16px] sm:text-[20px] transition-transform hover:scale-105 hover:text-gray-700">
+            View All Posts
+          </Link>
+        </div>
+      </div>
+            {/* contact to instagram   */}
+
+            <div className="relative w-full h-auto">
+        {/* Image Section */}
+        <div className="w-full h-[450px]">
+          <Image
+            src={"/pic12.png"}
+            alt="pic12"
+            width={1440}
+            height={450}
+            className="w-full h-full object-cover"
+          />
+        </div>
+
+        <div className="absolute inset-0 flex flex-col items-center justify-center space-y-4">
+          <div className="text-center">
+            <p className="font-bold text-[40px] md:text-[60px] leading-[50px] md:leading-[90px]">
+              Our Instagram
+            </p>
+            <p className="font-[400] text-[16px] md:text-[20px] leading-[24px] md:leading-[30px]">
+              Follow our store on Instagram
+            </p>
+          </div>
+          <div>
+            <button className="w-[200px] h-[50px] md:w-[255px] md:h-[64px] rounded-full bg-white transition-transform hover:scale-105 text-black font-[500] text-[16px] md:text-[20px] drop-shadow-lg">
+              Follow Us
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   );

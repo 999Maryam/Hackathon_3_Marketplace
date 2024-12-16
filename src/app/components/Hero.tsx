@@ -1,26 +1,28 @@
 import { FC } from "react";
+import Link from "next/link";
 
 const Hero: FC = () => {
   return (
-    <div className="bg-[#FBEBB5] min-h-screen flex items-center">
-      <div className="container mx-auto flex flex-col-reverse md:flex-row items-center px-4 md:px-8">
-        {/* Left Content */}
-        <div className="text-center md:text-left flex-1">
-          <h1 className="text-4xl md:text-5xl font-medium text-black mb-4">
-            Rocket single
-            <br /> seater
-          </h1>
-          <button className="mt-2 text-lg text-black underline hover:text-gray-700">
+    <div className="bg-[#FBEBB5] w-full h-auto">
+      <div className="container mx-auto px-4 md:px-8 lg:px-20 flex flex-col-reverse lg:flex-row items-center lg:justify-between">
+        {/* Text Section */}
+        <div className="flex flex-col items-center sm:items-start text-center sm:text-left lg:w-1/2 lg:mt-20">
+          <p className="text-[24px] sm:text-[36px] md:text-[48px] lg:text-[64px] mt-10 sm:mt-16 md:mt-20 font-[500] leading-[36px] sm:leading-[48px] md:leading-[64px] lg:leading-[86px]">
+            Rocket Single Seater
+          </p>
+          <Link
+            href="/Shop"
+            className="mt-4 text-[16px] sm:text-[20px] md:text-[24px] font-[500] leading-[24px] sm:leading-[28px] md:leading-[36px] relative inline-block text-black transition-all underline"
+          >
             Shop Now
-          </button>
+          </Link>
         </div>
-
         {/* Right Image */}
-        <div className="flex-1 flex justify-center">
+        <div className="w-full lg:w-1/2 flex justify-center lg:justify-end mt-8 lg:mt-0">
           <img
-            src="/sofa.png" // Replace with actual image path
+            src="/sofa.png"
             alt="Rocket Single Seater"
-            className="w-full max-w-md md:max-w-lg drop-shadow-lg"
+            className="w-full max-w-sm sm:max-w-md md:max-w-lg drop-shadow-lg"
           />
         </div>
       </div>

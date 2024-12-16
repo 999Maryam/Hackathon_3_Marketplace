@@ -1,96 +1,91 @@
-import { FC } from "react";
+import Link from "next/link";
+import React from "react";
 
-const Footer: FC = () => {
+const Footer = () => {
   return (
-    <footer className="bg-gray-50 text-gray-700 py-8">
-      <div className="container mx-auto px-4 md:px-8">
-        {/* Instagram Section */}
-        <div className="text-center mb-8">
-          <h2 className="text-2xl font-bold mb-2">Our Instagram</h2>
-          <p className="text-gray-500">Follow our store on Instagram</p>
-          <button className="mt-4 px-6 py-2 bg-gray-900 text-white rounded-full hover:bg-gray-700 transition">
-            Follow Us
-          </button>
-        </div>
-
-        {/* Footer Links */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
-          {/* Address */}
-          <div>
-            <p className="text-gray-900 font-bold mb-2">400 University Drive Suite 200 Coral Gables, FL 33134 USA</p>
+    <div>
+      <div className="w-full bg-white py-12 px-4">
+        <div className="max-w-[1240px] mx-auto flex flex-wrap justify-between items-start gap-8">
+          {/* Address Section */}
+          <div className="w-full sm:w-[285px]">
+            <p className="font-[400] text-[16px] leading-[24px] text-[#9F9F9F] sm:mt-20">
+              400 University Drive Suite 200 Coral <br /> Gables, <br /> FL
+              33134 USA
+            </p>
           </div>
-
-          {/* Links */}
-          <div>
-            <h3 className="font-bold mb-2">Links</h3>
-            <ul>
-              <li>
-                <a href="#" className="text-gray-500 hover:text-gray-900">
-                  Home
-                </a>
-              </li>
-              <li>
-                <a href="#" className="text-gray-500 hover:text-gray-900">
-                  Shop
-                </a>
-              </li>
-              <li>
-                <a href="#" className="text-gray-500 hover:text-gray-900">
-                  About
-                </a>
-              </li>
-              <li>
-                <a href="#" className="text-gray-500 hover:text-gray-900">
-                  Contact
-                </a>
-              </li>
-            </ul>
+          {/* Links Section */}
+          <div className="w-full sm:w-[352px] flex justify-between gap-8">
+            <div className="space-y-7 flex flex-col">
+              <p className="font-[500] text-[16px] leading-[24px] text-[#9F9F9F] cursor-pointer">
+                Link
+              </p>
+              <Link
+                href={"/"}
+                className="font-[500] text-[16px] leading-[24px] text-black cursor-pointer"
+              >
+                Home
+              </Link>
+              <Link
+                href={"/Shop"}
+                className="font-[500] text-[16px] leading-[24px] text-black cursor-pointer"
+              >
+                Shop
+              </Link>
+              <Link
+                href="/About"
+                className="font-[500] text-[16px] leading-[24px] text-black cursor-pointer"
+              >
+                About
+              </Link>
+              <Link
+                href="/Contact"
+                className="font-[500] text-[16px] leading-[24px] text-black cursor-pointer"
+              >
+                Contact
+              </Link>
+            </div>
+            <div className="space-y-7 ">
+              <p className="font-[500] text-[16px] leading-[24px] text-[#9F9F9F] cursor-pointer">
+                Help
+              </p>
+              <p className="font-[500] text-[16px] leading-[24px] text-black cursor-pointer">
+                Payment Options
+              </p>
+              <p className="font-[500] text-[16px] leading-[24px] text-black cursor-pointer">
+                Returns
+              </p>
+              <p className="font-[500] text-[16px] leading-[24px] text-black cursor-pointer">
+                Privacy Policies
+              </p>
+            </div>
           </div>
-
-          {/* Help */}
-          <div>
-            <h3 className="font-bold mb-2">Help</h3>
-            <ul>
-              <li>
-                <a href="#" className="text-gray-500 hover:text-gray-900">
-                  Payment Options
-                </a>
-              </li>
-              <li>
-                <a href="#" className="text-gray-500 hover:text-gray-900">
-                  Returns
-                </a>
-              </li>
-              <li>
-                <a href="#" className="text-gray-500 hover:text-gray-900">
-                  Privacy Policies
-                </a>
-              </li>
-            </ul>
-          </div>
-
-          {/* Newsletter */}
-          <div>
-            <h3 className="font-bold mb-2">Newsletter</h3>
-            <form className="flex flex-col">
+          {/* email Section */}
+          <div className="w-full sm:w-[286px]">
+            <p className="font-[500] text-[16px] leading-[24px] text-[#9F9F9F]">
+              Newsletter
+            </p>
+            <div className="mt-5 flex items-center justify-center space-x-3">
               <input
-                type="email"
+                type="text"
                 placeholder="Enter Your Email Address"
-                className="px-4 py-2 border border-gray-300 rounded-md mb-2 focus:outline-none focus:ring focus:ring-gray-200"
+                className="w-[230px] font-[400] text-[14px] leading-[21px] border-b border-black focus:outline-none"
               />
-              <button className="px-4 py-2 bg-gray-900 text-white rounded-md hover:bg-gray-700 transition">
-                Subscribe
+              <button className="font-[500] text-[14px] leading-[21px] text-black border-b border-black px-4">
+                SUBSCRIBE
               </button>
-            </form>
+            </div>
           </div>
-        </div>
-
-        {/* Copyright */}
-        <div className="text-center text-gray-500 text-sm border-t pt-4">
-          © 2022 Neutral House. All rights reserved.
+          <div className="w-full h-auto">
+            <div className="border border-[#D9D9D9] mt-6"></div>
+            <div className="w-[306px] h-[24px]">
+              <p className="font-[400] text-[16px] leading-[24px] text-black mt-8">
+                2022 Meubel House. All rights reverved
+              </p>
+            </div>
+          </div>
         </div>
       </div>
-    </footer>
+    </div>
   );
 };
 
