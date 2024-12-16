@@ -117,7 +117,7 @@ const page = () => {
         {/* Main Background Image */}
         <div className="relative">
           <Image
-            src={"/aboutpic.png"}
+            src={"/pic.png"}
             alt="pic1"
             width={1440}
             height={316}
