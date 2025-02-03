@@ -1,257 +1,147 @@
 
-import React from "react";
-import Image from "next/image";
-import { FaChevronRight } from "react-icons/fa6";
-import AboveFooter from "../components/AboveFooter";
+import React from 'react'
+import Image from 'next/image'
+import Link from 'next/link'
+import AboveFooter from '../components/AboveFooter'
 
-const CheckoutPage = () => {
-  return (
-    <>
-      <div className="relative">
-        <Image
-          src={"/pic.png"}
-          alt="pic1"
-          width={1440}
-          height={316}
-          className="w-full h-auto object-cover"
-        />
-        <div className="absolute inset-0 flex flex-col items-center justify-center text-center">
-          <Image
-            src={"/logo.png"}
-            alt="pic2"
-            width={77}
-            height={77}
-            className="w-[7%] md:w-[77px] md:h-[77px] "
-          />
-          <p className="font-[500] text-[24px] sm:text-[36px] md:text-[48px] lg:text-[56px] leading-[36px] sm:leading-[48px] md:leading-[72px] lg:leading-[80px] text-black">
-            Checkout
-          </p>
-          <div className="text-[12px] sm:text-[16px]  text-gray-600 flex items-center space-x-1">
-            <p>Home</p>
-            <FaChevronRight className="text-gray-800" />
-            <p>Checkout</p>
-          </div>
-        </div>
-      </div>
+function CheckOut() {
+    return (
+        <div className="max-w-screen-2xl container mx-auto pb-8 px-4">
+            <div className='bg-[#faf4f4]'>
+            </div>
 
-      {/* Billing Details */}
-      <div className="flex flex-wrap gap-12 py-16 px-16">
-        {/* Left Section: Billing Details */}
-        <div className="flex-1 min-w-[300px]">
-          <h2 className="text-[36px] font-[600] mb-6">Billing details</h2>
-          <form className="space-y-6">
-            <div className="flex flex-wrap gap-3">
-              <div className="flex-1 min-w-[200px]">
-                <label
-                  htmlFor="firstName"
-                  className="block mb-2 text-[16px] font-normal"
-                >
-                  First Name
-                </label>
-                <input
-                  id="firstName"
-                  type="text"
-                  className="w-full border rounded-md p-4 text-[16px]"
+            {/* Banner Section */}
+            <div className="relative text-black">
+                <Image
+                    src="/pic.png"
+                    alt="Shop Banner"
+                    height={400}
+                    width={1600}
+                    className="w-full h-[200px] md:h-auto object-cover"
                 />
-              </div>
-              <div className="flex-1 min-w-[200px]">
-                <label
-                  htmlFor="lastName"
-                  className="block mb-2 text-[16px] font-normal"
-                >
-                  Last Name
-                </label>
-                <input
-                  id="lastName"
-                  type="text"
-                  className="w-full border rounded-md p-4 text-[16px]"
-                />
-              </div>
+                <h1 className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-2xl md:text-5xl font-semibold">
+                    Checkout
+                </h1>
+                {/* Breadcrumb Section */}
+                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 mt-14">
+                    <p className="text-gray-700 text-xs md:text-xl flex items-center">
+                        <Link href="/" className="font-bold hover:underline">Home</Link>
+                        <span className="font-bold mx-2">{'>'}</span>
+                        <Link href="/Shop" className="hover:underline">Checkout</Link>
+                    </p>
+                </div>
             </div>
 
+            {/* Billing Section */}
+<div className="flex flex-col lg:flex-row mx-10 gap-6 mt-8">
+    <div className="w-full lg:w-1/2 md:mx-20">
+        <h3 className="font-semibold text-2xl mt-10 mb-8">Billing Details</h3>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label
-                htmlFor="companyName"
-                className="block mb-2 text-[16px] font-normal"
-              >
-                Company Name (Optional)
-              </label>
-              <input
-                id="companyName"
-                type="text"
-                className="w-full border rounded-md p-4 text-[16px]"
-              />
+                <label htmlFor="firstName" className="block my-4">First Name</label>
+                <input type="text" id="firstName" className="w-full border border-gray-500 rounded p-3" />
             </div>
-
             <div>
-              <label
-                htmlFor="country"
-                className="block mb-2 text-[16px] font-normal"
-              >
-                Country / Region
-              </label>
-              <select
-                id="country"
-                className="w-full border rounded-md p-4 text-[16px] bg-white"
-              >
-                <option value="">Select a country</option>
-                <option value="pakistan">Pakistan</option>
-                <option value="india">India</option>
-              </select>
+                <label htmlFor="lastName" className="block my-4">Last Name</label>
+                <input type="text" id="lastName" className="w-full border border-gray-500 rounded p-3" />
             </div>
-
-            <div>
-              <label
-                htmlFor="streetAddress"
-                className="block mb-2 text-[16px] font-normal"
-              >
-                Street Address
-              </label>
-              <input
-                id="streetAddress"
-                type="text"
-                className="w-full border rounded-md p-4 text-[16px]"
-              />
-            </div>
-
-            <div className="flex flex-wrap gap-3">
-              <div className="flex-1 min-w-[200px]">
-                <label
-                  htmlFor="city"
-                  className="block mb-2 text-[16px] font-normal"
-                >
-                  Town / City
-                </label>
-                <input
-                  id="city"
-                  type="text"
-                  className="w-full border rounded-md p-4 text-[16px]"
-                />
-              </div>
-              <div className="flex-1 min-w-[200px]">
-                <label
-                  htmlFor="province"
-                  className="block mb-2 text-[16px] font-normal"
-                >
-                  Province
-                </label>
-                <input
-                  id="province"
-                  type="text"
-                  className="w-full border rounded-md p-4 text-[16px]"
-                />
-              </div>
-            </div>
-
-            <div>
-              <label
-                htmlFor="zip"
-                className="block mb-2 text-[16px] font-normal"
-              >
-                ZIP Code
-              </label>
-              <input
-                id="zip"
-                type="text"
-                className="w-full border rounded-md p-4 text-[16px]"
-              />
-            </div>
-
-            <div>
-              <label
-                htmlFor="phone"
-                className="block mb-2 text-[16px] font-normal"
-              >
-                Phone
-              </label>
-              <input
-                id="phone"
-                type="tel"
-                className="w-full border rounded-md p-4 text-[16px]"
-              />
-            </div>
-
-            <div>
-              <label
-                htmlFor="email"
-                className="block mb-2 text-[16px] font-normal"
-              >
-                Email Address
-              </label>
-              <input
-                id="email"
-                type="email"
-                className="w-full border rounded-md p-4 text-[16px]"
-              />
-            </div>
-
-            <div>
-              <label
-                htmlFor="additionalInfo"
-                className="block mb-2 text-[16px] font-normal"
-              >
-                Additional Information
-              </label>
-              <textarea
-                id="additionalInfo"
-                rows={4}
-                className="w-full border rounded-md p-4 text-[16px]"
-              ></textarea>
-            </div>
-          </form>
         </div>
 
-        {/* Right Section: Order Details */}
-        <div className="flex-1 min-w-[300px] p-2 rounded-md">
-          <h2 className="text-[32px] font-[600] mb-9">Product</h2>
-          <div className="mb-8 text-[16px]">
-            <div className="flex justify-between mb-4">
-              <p className="text-gray-400">Angora Sofa x 1</p>
-              <p>Rs. 250,000</p>
-            </div>
-            <div className="flex justify-between mb-6">
-              <p>Subtotal</p>
-              <p>Rs. 250,000</p>
-            </div>
-            <div className="flex justify-between text-gray-800 font-semibold mb-6">
-              <p>Total</p>
-              <p className="text-[24px] font-700 text-[#B88E2F]">Rs. 250,000</p>
-            </div>
-          </div>
-
-          {/* Payment Options */}
-          <div className="space-y-4">
-            <label className="block">
-              <input type="radio" name="payment" className="mr-2" />
-              Direct Bank Transfer
-            </label>
-            <p className="text-[14px] text-gray-500 ml-6">
-              Make your payment directly into our bank account. Please use your
-              Order ID as the payment reference. Your order will not be shipped
-              until the funds have cleared in our account.
-            </p>
-            <label className="block">
-              <input type="radio" name="payment" className="mr-2" />
-              Cash on Delivery
-            </label>
-            <p className="text-[14px]">
-              Your personal data will be used to support your experience
-              throughout this website, to manage access to your account, and for
-              other purposes described in our{" "}
-              <span className="font-semibold">privacy policy</span>.
-            </p>
-          </div>
-          <div className="flex justify-center">
-            <button className="w-[318px] bg-white text-black border-2 border-black rounded-md text-[20px] font-medium py-4 mt-6">
-              Place Order
-            </button>
-          </div>
+        <div className="mt-4">
+            <label htmlFor="companyName" className="block my-4 mt-6">Company Name (Optional)</label>
+            <input type="text" id="companyName" className="w-full border-gray-500 rounded border p-3" />
         </div>
-      </div>
 
-      <AboveFooter />
-    </>
-  );
-};
+        <div className="mt-4">
+            <label htmlFor="country" className="block my-4 mt-6">Country / Region</label>
+            <input type="text" id="country" className="w-full border-gray-500 rounded border p-3" />
+        </div>
 
-export default CheckoutPage;
+        <div className="mt-4">
+            <label htmlFor="address" className="block my-4 mt-6">Street Address</label>
+            <input type="text" id="address" className="w-full border-gray-500 rounded border p-3" />
+        </div>
+
+        <div className="gap-4 mt-4">
+            <div>
+                <label htmlFor="town" className="block my-4 mt-6">Town / City</label>
+                <input type="text" id="town" className="w-full border-gray-500 rounded border p-3" />
+            </div>
+            <div>
+                <label htmlFor="province" className="block my-4 mt-6">Province</label>
+                <input type="text" id="province" className="w-full border-gray-500 rounded border p-3" />
+            </div>
+        </div>
+
+        <div className="mt-4">
+            <label htmlFor="zip" className="block my-4 mt-6">ZIP Code</label>
+            <input type="text" id="zip" className="w-full border-gray-500 rounded border p-3" />
+        </div>
+
+        <div className="mt-4">
+            <label htmlFor="phone" className="block my-4 mt-6">Phone</label>
+            <input type="text" id="phone" className="w-full border-gray-500 rounded border p-3" />
+        </div>
+
+        <div className="mt-4">
+            <label htmlFor="email" className="block my-4 mt-6">Email Address</label>
+            <input type="text" id="email" className="w-full border-gray-500 rounded border p-3" />
+        </div>
+
+        <div className="mt-4">
+            <input type="text" id="additionalInfo" placeholder="Additional Information" className="w-full border-gray-500 my-4 mt-6 rounded border p-3" />
+        </div>
+    </div>
+
+    {/* Order Summary */}
+    <div className="w-full lg:w-1/2 md:mx-20 mt-4 lg:mt-0">
+        <div className="mt-4">
+            <table className="w-full table-auto">
+                <thead>
+                    <tr>
+                        <th className="py-2 text-left text-xl">Product</th>
+                        <th className="py-2 text-right text-xl">Subtotal</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td className="py-2 text-gray-500">Asgaard Sofa x 1</td>
+                        <td className="py-2 text-right">Rs: 250,000.00</td>
+                    </tr>
+                    <tr>
+                        <td className="py-2 font-semibold">Subtotal</td>
+                        <td className="py-2 text-right">Rs: 250,000.00</td>
+                    </tr>
+                    <tr className="border-b font-semibold">
+                        <td className="py-2">Total</td>
+                        <td className="py-2 text-yellow-700 text-right text-xl">Rs: 250,000.00</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        {/* Payment Method */}
+        <div className="flex items-center mt-4">
+            <input type="radio" id="bankTransfer" name="payment" className="mr-2" />
+            <label htmlFor="bankTransfer" className="text-md">Direct Bank Transfer</label>
+        </div>
+        <p className="text-sm text-gray-400 mt-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at arcu at eros malesuada facilisis.</p>
+
+        <div className="flex items-center mt-4 text-gray-400">
+            <input type="radio" id="cod" name="payment" className="mr-2" />
+            <label htmlFor="cod" className="text-md">Cash On Delivery</label>
+        </div>
+        <p className="text-sm text-gray-600 mt-6">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at arcu at eros malesuada facilisis.</p>
+
+        <button className="mt-6 border border-black py-3 px-14 rounded-xl">Place Order</button>
+    </div>
+</div>
+
+           <div className='my-10'>
+           <AboveFooter />
+           </div>
+        </div>
+    )
+}
+
+export default CheckOut

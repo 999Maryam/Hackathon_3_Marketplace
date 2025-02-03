@@ -17,7 +17,7 @@ const Features = () => {
                 <p className="font-[500] text-[24px] lg:text-[36px] leading-[36px] lg:leading-[54px]">
                   Side Table
                 </p>
-                <p className="underline underline-offset-8 mt-2 cursor-pointer font-[500] text-[16px] lg:text-[18px] transition-transform hover:scale-105 hover:text-gray-700">
+                <p className="underline underline-offset-[20px] mt-2 cursor-pointer font-[500] text-[16px] lg:text-[18px] transition-transform hover:scale-105 hover:text-gray-700">
                   View More
                 </p>
               </div>
@@ -36,7 +36,7 @@ const Features = () => {
                 <p className="font-[500] text-[24px] lg:text-[36px] leading-[36px] lg:leading-[54px]">
                   Side Table
                 </p>
-                <p className="underline underline-offset-8 mt-2 cursor-pointer font-[500] text-[16px] lg:text-[18px] transition-transform hover:scale-105 hover:text-gray-700">
+                <p className="underline underline-offset-[20px] mt-2 cursor-pointer font-[500] text-[16px] lg:text-[18px] transition-transform hover:scale-105 hover:text-gray-700">
                   View More
                 </p>
               </div>

@@ -13,7 +13,7 @@ const Hero: FC = () => {
           </p>
           <Link
             href="/Shop"
-            className="mt-4 text-[16px] sm:text-[20px] md:text-[24px] font-[500] leading-[24px] sm:leading-[28px] md:leading-[36px] relative inline-block text-black transition-all underline"
+            className="mt-4 text-[16px] sm:text-[20px] md:text-[24px] font-[500] leading-[24px] sm:leading-[28px] md:leading-[36px] relative inline-block text-black transition-all underline underline-offset-[20px]"
           >
             Shop Now
           </Link>

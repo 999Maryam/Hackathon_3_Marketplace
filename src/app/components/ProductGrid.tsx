@@ -64,7 +64,7 @@ const ProductGrid = () => {
           </p>
         </div>
 
-        {/* Image Grid */}
+        Image Grid
         <div className="flex justify-center">
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-10 px-4 lg:px-12 max-w-7xl">
             {products.map((product) => (
@@ -94,7 +94,7 @@ const ProductGrid = () => {
 
         {/* View More Section */}
         <div className="flex justify-center mt-16 lg:mt-28">
-          <p className="underline underline-offset-8 cursor-pointer font-[500] text-[14px] sm:text-[16px] lg:text-[18px] transition-transform hover:scale-105 hover:text-gray-700">
+          <p className="underline underline-offset-[20px] cursor-pointer font-[500] text-[14px] sm:text-[16px] lg:text-[18px] transition-transform hover:scale-105 hover:text-gray-700">
             View More
           </p>
         </div>
@@ -125,7 +125,7 @@ const ProductGrid = () => {
             </div>
             <div className="mt-4">
               <Link
-                href="/Shop/ProductDetails"
+                href="/ProductDetails"
                 className="text-[16px] md:text-[20px] leading-[28px] font-[500] text-[#000000] border border-[#9b9b9b] py-3 px-6 inline-block hover:bg-[#faeec7] transition-colors"
               >
                 Order Now
@@ -175,8 +175,8 @@ const ProductGrid = () => {
         {/* View All Posts */}
         <div className="flex justify-center mt-12">
           <Link
-            href={"/Blog"}
-            className="underline underline-offset-8 cursor-pointer font-medium text-[16px] sm:text-[20px] transition-transform hover:scale-105 hover:text-gray-700"
+            href={"/Blogs"}
+            className="underline underline-offset-[20px] cursor-pointer font-medium text-[16px] sm:text-[20px] transition-transform hover:scale-105 hover:text-gray-700"
           >
             View All Posts
           </Link>

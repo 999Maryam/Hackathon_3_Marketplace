@@ -81,7 +81,7 @@ const page = () => {
               in.
             </p>
 
-            <p className="text-gray-500 text-lg font-semibold cursor-pointer underline underline-offset-8 transition-transform hover:scale-105 hover:underline">
+            <p className="text-black text-lg font-semibold cursor-pointer underline underline-offset-[20px] transition-transform hover:scale-105 hover:underline">
               Read more
             </p>
           </div>
@@ -123,7 +123,7 @@ const page = () => {
               in.
             </p>
 
-            <p className="text-gray-500 text-lg font-semibold cursor-pointer underline underline-offset-8 transition-transform hover:scale-105 hover:underline">
+            <p className="text-black text-lg font-semibold cursor-pointer underline underline-offset-[20px] transition-transform hover:scale-105 hover:underline">
               Read more
             </p>
           </div>
@@ -166,7 +166,7 @@ const page = () => {
               in.
             </p>
 
-            <p className="text-gray-500 text-lg font-semibold cursor-pointer underline underline-offset-8 transition-transform hover:scale-105 hover:underline">
+            <p className="text-black text-lg font-semibold cursor-pointer underline underline-offset-[20px] transition-transform hover:scale-105 hover:underline">
               Read more
             </p>
           </div>
