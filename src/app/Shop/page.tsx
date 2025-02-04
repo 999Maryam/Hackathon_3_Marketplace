@@ -7,7 +7,6 @@ import ShopLine from '../components/shop';
 import { Product } from '../../../types/product';
 import AboveFooter from '../components/AboveFooter';
 
-
 // Fetch products from Sanity
 async function fetchProducts(): Promise<Product[]> {
   const query = `*[_type == "product"]{
@@ -62,14 +61,12 @@ const Shop = async () => {
                 <div className="my-6">
                   <ShopLine />
                 </div>
-
   
   <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
     {products.map((product:Product) =>(
-        <ProductListing product={product}  key={product.id}/>
-
-      ))}
-
+      <ProductListing product={product}  key={product.id}/>
+          ))}
+      
 </div>
         <div className="justify-center mx-auto">
                 <Page />

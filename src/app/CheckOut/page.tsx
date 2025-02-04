@@ -1,147 +1,252 @@
+"use client";
 
-import React from 'react'
-import Image from 'next/image'
-import Link from 'next/link'
-import AboveFooter from '../components/AboveFooter'
+import { useState, useEffect } from "react";
+import Image from "next/image";
+import { getCartItems } from "@/app/actions/actions";
+import Link from "next/link";
+import { Product } from "../../../types/product";
+import { urlFor } from "@/sanity/lib/image";
+import { CgChevronRight } from "react-icons/cg";
 
-function CheckOut() {
-    return (
-        <div className="max-w-screen-2xl container mx-auto pb-8 px-4">
-            <div className='bg-[#faf4f4]'>
-            </div>
 
-            {/* Banner Section */}
-            <div className="relative text-black">
-                <Image
-                    src="/pic.png"
-                    alt="Shop Banner"
-                    height={400}
-                    width={1600}
-                    className="w-full h-[200px] md:h-auto object-cover"
-                />
-                <h1 className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-2xl md:text-5xl font-semibold">
-                    Checkout
-                </h1>
-                {/* Breadcrumb Section */}
-                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 mt-14">
-                    <p className="text-gray-700 text-xs md:text-xl flex items-center">
-                        <Link href="/" className="font-bold hover:underline">Home</Link>
-                        <span className="font-bold mx-2">{'>'}</span>
-                        <Link href="/Shop" className="hover:underline">Checkout</Link>
+export default function CheckoutPage() {
+  const [cartItems, setCartItems] = useState<Product[]>([]);
+  const [discount, setDiscount] = useState<number>(0);
+  const [formValues, setFormValues] = useState({
+    firstName: "",
+    lastName: "",
+    address: "",
+    city: "",
+    zipCode: "",
+    phone: "",
+    email: "",
+  });
+
+  const [formErrors, setFormErrors] = useState({
+    firstName: false,
+    lastName: false,
+    address: false,
+    city: false,
+    zipCode: false,
+    phone: false,
+    email: false,
+  });
+
+  useEffect(() => {
+    setCartItems(getCartItems());
+    const appliedDiscount = localStorage.getItem("appliedDiscount");
+    if (appliedDiscount) {
+      setDiscount(Number(appliedDiscount));
+    }
+  }, []);
+
+  const subtotal = cartItems.reduce(
+    (total, item) => total + item.price * item.inventory,
+    0
+  );
+  const total = Math.max(subtotal - discount, 0);
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFormValues({
+      ...formValues,
+      [e.target.id]: e.target.value,
+    });
+  };
+
+  const validateForm = () => {
+    const errors = {
+      firstName: !formValues.firstName,
+      lastName: !formValues.lastName,
+      address: !formValues.address,
+      city: !formValues.city,
+      zipCode: !formValues.zipCode,
+      phone: !formValues.phone,
+      email: !formValues.email,
+    };
+    setFormErrors(errors);
+    return Object.values(errors).every((error) => !error);
+  };
+
+  const handlePlaceOrder = () => {
+    if (validateForm()) {
+      localStorage.removeItem("appliedDiscount");
+    //   toast.success("Order placed successfully!");
+    } else {
+    //   toast.error("Please fill in all the fields.");
+    }
+  };
+
+  return (
+    <div className={`min-h-screen bg-gray-50`}>
+      {/* Breadcrumb */}
+      <div className="mt-6">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <nav className="flex items-center gap-2 py-4">
+            <Link
+              href="/cart"
+              className="text-[#666666] hover:text-black transition text-sm"
+            >
+              Cart
+            </Link>
+            <CgChevronRight className="w-4 h-4 text-[#666666]" />
+            <span className="text-sm">Checkout</span>
+          </nav>
+        </div>
+      </div>
+
+      {/* Main Content */}
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          {/* Order Summary */}
+          <div className="bg-white border rounded-lg p-6 space-y-4">
+            <h2 className="text-lg font-semibold mb-4">Order Summary</h2>
+            {cartItems.length > 0 ? (
+              cartItems.map((item) => (
+                <div
+                  key={item._id}
+                  className="flex items-center gap-4 py-3 border-b"
+                >
+                  <div className="w-16 h-16 rounded overflow-hidden">
+                    {item.image && (
+                      <Image
+                        src={urlFor(item.image).url()}
+                        alt={item.name}
+                        width={64}
+                        height={64}
+                        className="object-cover w-full h-full"
+                      />
+                    )}
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="text-sm font-medium">{item.name}</h3>
+                    <p className="text-xs text-gray-500">
+                      Quantity: {item.inventory}
                     </p>
+                  </div>
+                  <p className="text-sm font-medium">
+                    ${item.price * item.inventory}
+                  </p>
                 </div>
+              ))
+            ) : (
+              <p className="text-sm text-gray-500">Your cart is empty.</p>
+            )}
+            <div className="text-right pt-4">
+              <p className="text-sm">
+                Subtotal: <span className="font-medium">${subtotal}</span>
+              </p>
+              <p className="text-sm">
+                Discount: <span className="font-medium">-${discount}</span>
+              </p>
+              <p className="text-lg font-semibold">
+                Total: ${total.toFixed(2)}
+              </p>
             </div>
+          </div>
 
-            {/* Billing Section */}
-<div className="flex flex-col lg:flex-row mx-10 gap-6 mt-8">
-    <div className="w-full lg:w-1/2 md:mx-20">
-        <h3 className="font-semibold text-2xl mt-10 mb-8">Billing Details</h3>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          {/* Billing Form */}
+          <div className="bg-white border rounded-lg p-6 space-y-6">
+            <h2 className="text-xl font-semibold">Billing Information</h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label htmlFor="firstName">First Name</label>
+                <input
+                  id="firstName"
+                  placeholder="Enter your first name"
+                  value={formValues.firstName}
+                  onChange={handleInputChange}
+                  className="border"
+                />
+                {formErrors.firstName && (
+                  <p className="text-sm text-red-500">
+                    First name is required.
+                  </p>
+                )}
+              </div>
+              <div>
+                <label htmlFor="lastName">Last Name </label>
+                <input
+                  id="lastName"
+                  placeholder="Enter your last name"
+                  value={formValues.lastName}
+                  onChange={handleInputChange}
+                />
+                {formErrors.lastName && (
+                  <p className="text-sm text-red-500">
+                    Last name is required.
+                  </p>
+                )}
+              </div>
+            </div>
             <div>
-                <label htmlFor="firstName" className="block my-4">First Name</label>
-                <input type="text" id="firstName" className="w-full border border-gray-500 rounded p-3" />
+              <label htmlFor="address">Address </label>
+              <input
+                id="address"
+                placeholder="Enter your address"
+                value={formValues.address}
+                onChange={handleInputChange}
+              />
+              {formErrors.address && (
+                <p className="text-sm text-red-500">Address is required.</p>
+              )}
             </div>
             <div>
-                <label htmlFor="lastName" className="block my-4">Last Name</label>
-                <input type="text" id="lastName" className="w-full border border-gray-500 rounded p-3" />
-            </div>
-        </div>
-
-        <div className="mt-4">
-            <label htmlFor="companyName" className="block my-4 mt-6">Company Name (Optional)</label>
-            <input type="text" id="companyName" className="w-full border-gray-500 rounded border p-3" />
-        </div>
-
-        <div className="mt-4">
-            <label htmlFor="country" className="block my-4 mt-6">Country / Region</label>
-            <input type="text" id="country" className="w-full border-gray-500 rounded border p-3" />
-        </div>
-
-        <div className="mt-4">
-            <label htmlFor="address" className="block my-4 mt-6">Street Address</label>
-            <input type="text" id="address" className="w-full border-gray-500 rounded border p-3" />
-        </div>
-
-        <div className="gap-4 mt-4">
-            <div>
-                <label htmlFor="town" className="block my-4 mt-6">Town / City</label>
-                <input type="text" id="town" className="w-full border-gray-500 rounded border p-3" />
+              <label htmlFor="city">City</label>
+              <input
+                id="city"
+                placeholder="Enter your city"
+                value={formValues.city}
+                onChange={handleInputChange}
+              />
+              {formErrors.city && (
+                <p className="text-sm text-red-500">City is required.</p>
+              )}
             </div>
             <div>
-                <label htmlFor="province" className="block my-4 mt-6">Province</label>
-                <input type="text" id="province" className="w-full border-gray-500 rounded border p-3" />
+              <label htmlFor="zipCode">Zip Code</label>
+              <input
+                id="zipCode"
+                placeholder="Enter your zip code"
+                value={formValues.zipCode}
+                onChange={handleInputChange}
+              />
+              {formErrors.zipCode && (
+                <p className="text-sm text-red-500">Zip Code is required.</p>
+              )}
             </div>
+            <div>
+              <label htmlFor="phone">Phone</label>
+              <input
+                id="phone"
+                placeholder="Enter your phone number"
+                value={formValues.phone}
+                onChange={handleInputChange}
+              />
+              {formErrors.phone && (
+                <p className="text-sm text-red-500">Phone is required.</p>
+              )}
+            </div>
+            <div>
+              <label htmlFor="email">Email</label>
+              <input
+                id="email"
+                placeholder="Enter your email address"
+                value={formValues.email}
+                onChange={handleInputChange}
+              />
+              {formErrors.email && (
+                <p className="text-sm text-red-500">Email is required.</p>
+              )}
+            </div>
+            <button
+              className="w-full h-12 bg-blue-500 hover:bg-blue-700 text-white"
+              onClick={handlePlaceOrder}
+            >
+              Place Order
+            </button>
+          </div>
         </div>
-
-        <div className="mt-4">
-            <label htmlFor="zip" className="block my-4 mt-6">ZIP Code</label>
-            <input type="text" id="zip" className="w-full border-gray-500 rounded border p-3" />
-        </div>
-
-        <div className="mt-4">
-            <label htmlFor="phone" className="block my-4 mt-6">Phone</label>
-            <input type="text" id="phone" className="w-full border-gray-500 rounded border p-3" />
-        </div>
-
-        <div className="mt-4">
-            <label htmlFor="email" className="block my-4 mt-6">Email Address</label>
-            <input type="text" id="email" className="w-full border-gray-500 rounded border p-3" />
-        </div>
-
-        <div className="mt-4">
-            <input type="text" id="additionalInfo" placeholder="Additional Information" className="w-full border-gray-500 my-4 mt-6 rounded border p-3" />
-        </div>
+      </div>
     </div>
-
-    {/* Order Summary */}
-    <div className="w-full lg:w-1/2 md:mx-20 mt-4 lg:mt-0">
-        <div className="mt-4">
-            <table className="w-full table-auto">
-                <thead>
-                    <tr>
-                        <th className="py-2 text-left text-xl">Product</th>
-                        <th className="py-2 text-right text-xl">Subtotal</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td className="py-2 text-gray-500">Asgaard Sofa x 1</td>
-                        <td className="py-2 text-right">Rs: 250,000.00</td>
-                    </tr>
-                    <tr>
-                        <td className="py-2 font-semibold">Subtotal</td>
-                        <td className="py-2 text-right">Rs: 250,000.00</td>
-                    </tr>
-                    <tr className="border-b font-semibold">
-                        <td className="py-2">Total</td>
-                        <td className="py-2 text-yellow-700 text-right text-xl">Rs: 250,000.00</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-
-        {/* Payment Method */}
-        <div className="flex items-center mt-4">
-            <input type="radio" id="bankTransfer" name="payment" className="mr-2" />
-            <label htmlFor="bankTransfer" className="text-md">Direct Bank Transfer</label>
-        </div>
-        <p className="text-sm text-gray-400 mt-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at arcu at eros malesuada facilisis.</p>
-
-        <div className="flex items-center mt-4 text-gray-400">
-            <input type="radio" id="cod" name="payment" className="mr-2" />
-            <label htmlFor="cod" className="text-md">Cash On Delivery</label>
-        </div>
-        <p className="text-sm text-gray-600 mt-6">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at arcu at eros malesuada facilisis.</p>
-
-        <button className="mt-6 border border-black py-3 px-14 rounded-xl">Place Order</button>
-    </div>
-</div>
-
-           <div className='my-10'>
-           <AboveFooter />
-           </div>
-        </div>
-    )
+  );
 }
-
-export default CheckOut

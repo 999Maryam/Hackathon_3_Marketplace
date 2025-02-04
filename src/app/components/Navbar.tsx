@@ -115,15 +115,15 @@ const Navbar = () => {
             <div className="flex gap-4 mt-10">
               <Link
                 href="/Cart"
-                className=" flex-1 text-[18px] text-center border rounded-lg text-black hover:bg-gray-100"
+                className=" flex-1 text-2xl text-center rounded-lg text-white bg-black hover:bg-gray-800 px-3 py-4"
               >
-                View Cart
+              ViewCart
               </Link>
               <Link
                 href="/CheckOut"
-                className="flex-1 text-center bg-black text-white rounded-2xl hover:bg-gray-800 "
+                className="flex-1 text-2xl text-center rounded-lg bg-black text-white hover:bg-gray-800 px-3 py-4"
               >
-                Checkout
+                CheckOut
               </Link>
             </div>
           </div>

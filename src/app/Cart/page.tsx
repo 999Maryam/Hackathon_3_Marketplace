@@ -1,139 +1,135 @@
-import React from "react";
+"use client";
+
+import { Product } from "../../../types/product";
+import React, { useEffect, useState } from "react";
+import {
+  getCartItems,
+  removeFromCart,
+  updateCartQuantity,
+} from "../actions/actions";
 import Image from "next/image";
-import { ImBin2 } from "react-icons/im";
-import AboveFooter from "../components/AboveFooter";
-import { FaChevronRight } from "react-icons/fa6";
-import Link from "next/link";
+import { urlFor } from "@/sanity/lib/image";
+import Swal from "sweetalert2";
 
-const page = () => {
+const CartPage = () => {
+  const [cartItems, setCartItems] = useState<Product[]>([]);
+
+  useEffect(() => {
+    setCartItems([...getCartItems()]);
+  }, []);
+
+  const handleRemove = (id: string) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to undo this action!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#d33",
+      cancelButtonColor: "#3085d6",
+      confirmButtonText: "Yes, remove it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        removeFromCart(id);
+        setCartItems([...getCartItems()]);
+        Swal.fire("Removed!", "Item has been removed from your cart.", "success");
+      }
+    });
+  };
+
+  const handleQuantityChange = (id: string, quantity: number) => {
+    updateCartQuantity(id, quantity);
+    setCartItems([...getCartItems()]);
+  };
+
+  const handleIncrement = (id: string) => {
+    const updatedCart = cartItems.map((item) =>
+      item._id === id ? { ...item, inventory: item.inventory + 1 } : item
+    );
+    setCartItems(updatedCart);
+  };
+
+  const handleDecrement = (id: string) => {
+    const updatedCart = cartItems.map((item) =>
+      item._id === id && item.inventory > 1
+        ? { ...item, inventory: item.inventory - 1 }
+        : item
+    );
+    setCartItems(updatedCart);
+  };
+
   return (
-    <>
-      <div className="relative">
-        <Image
-          src={"/pic.png"}
-          alt="pic1"
-          width={1440}
-          height={316}
-          className="w-full h-auto object-cover"
-        />
-        <div className="absolute inset-0 flex flex-col items-center justify-center text-center">
-          <Image
-            src={"/logo.png"}
-            alt="pic2"
-            width={77}
-            height={77}
-            className="w-[7%] md:w-[77px] md:h-[77px] "
-          />
-          <p className="font-[500] text-[24px] sm:text-[36px] md:text-[48px] lg:text-[56px] leading-[36px] sm:leading-[48px] md:leading-[72px] lg:leading-[80px] text-black">
-            Cart
-          </p>
-          <div className="text-[12px] sm:text-[16px]  text-gray-600 flex items-center space-x-1">
-            <p>Home</p>
-            <FaChevronRight className="text-gray-800" />
-            <p>Cart</p>
-          </div>
-        </div>
-      </div>
-      <div className="max-w-[1440px] h-[525px] bg-white flex justify-center items-center px-4 py-6">
-        {/* Main container */}
-        <div className="w-full md:w-[1240px] flex flex-col md:flex-row gap-4 sm:gap-6 md:gap-8">
-          {/* Left Section */}
-          <div className="w-full md:w-[60%] rounded-md p-4">
-            {/* Header Section */}
-            <div className="w-full py-3 bg-[#FFF9E5] rounded-md px-4 sm:px-8">
-              <ul className="flex flex-wrap sm:flex-nowrap justify-between">
-                <li className="text-[14px] sm:text-[16px] font-semibold">
-                  Product
-                </li>
-                <li className="text-[14px] sm:text-[16px] font-semibold">
-                  Price
-                </li>
-                <li className="text-[14px] sm:text-[16px] font-semibold">
-                  Quantity
-                </li>
-                <li className="text-[14px] sm:text-[16px] font-semibold">
-                  Subtotal
-                </li>
-              </ul>
-            </div>
+    <div className="p-6 bg-gray-100 min-h-screen flex flex-col items-center">
+      <h1 className="text-3xl font-bold mb-6 text-gray-800">Shopping Cart</h1>
 
-            {/* Content Section */}
-            <div className="flex flex-wrap md:flex-nowrap gap-4 sm:gap-6 mt-4 items-center bg-white">
-              {/* Product Image */}
-              <div className="w-[106px] h-[106px] rounded-lg bg-[#FBEBB5] flex items-center justify-center">
-                <Image
-                  src="/pic8.png"
-                  alt="sofa"
-                  width={100}
-                  height={100}
-                  className="object-contain"
-                />
-              </div>
-
-              {/* Product Details */}
-              <div className="flex flex-col md:flex-row md:justify-between gap-4 w-full items-start">
-                <ul className="flex flex-col md:flex-row justify-between w-full gap-2">
-                  <li className="text-[12px] sm:text-[14px] md:text-[16px] text-[#9F9F9F]">
-                    Asgaard sofa
-                  </li>
-                  <li className="text-[12px] sm:text-[14px] md:text-[16px] text-[#9F9F9F]">
-                    Rs. 250,000.00
-                  </li>
-                  <li className="text-[12px] sm:text-[14px] md:text-[16px] text-[#9F9F9F]">
-                    1
-                  </li>
-                  <li className="text-[12px] sm:text-[14px] md:text-[16px] text-[#9F9F9F]">
-                    Rs. 250,000.00
-                  </li>
-                </ul>
-                {/* Trash Icon */}
-                <div className="mt-2 sm:mt-0">
-                  <ImBin2 className="text-[#FBEBB5] text-base sm:text-lg md:text-xl" />
+      <div className="w-full max-w-4xl space-y-6">
+        {cartItems.length > 0 ? (
+          cartItems.map((item) => (
+            <div
+              key={item._id}
+              className="flex flex-col sm:flex-row items-center justify-between bg-white p-4 rounded-lg shadow-md"
+            >
+              <div className="flex items-center space-x-4">
+                {item.image && (
+                  <Image
+                    src={urlFor(item.image).url()}
+                    className="w-20 h-20 object-cover rounded-lg"
+                    alt="product image"
+                    width={500}
+                    height={500}
+                  />
+                )}
+                <div>
+                  <h2 className="text-lg font-semibold">{item.name}</h2>
+                  <p className="text-gray-500">Price: ${item.price}</p>
+                  <div className="flex items-center mt-2 space-x-2">
+                    <button
+                      onClick={() => handleDecrement(item._id)}
+                      className="px-3 py-1 bg-gray-300 rounded-md hover:bg-gray-400"
+                      disabled={item.inventory <= 1}
+                    >
+                      -
+                    </button>
+                    <span className="text-lg font-medium">{item.inventory}</span>
+                    <button
+                      onClick={() => handleIncrement(item._id)}
+                      className="px-3 py-1 bg-gray-300 rounded-md hover:bg-gray-400"
+                    >
+                      +
+                    </button>
+                  </div>
                 </div>
               </div>
+              <button
+                onClick={() => handleRemove(item._id)}
+                className="mt-4 sm:mt-0 px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600"
+              >
+                Remove
+              </button>
             </div>
-          </div>
-
-          {/* Right Section */}
-          <div className="w-full md:w-[35%] bg-[#FFF9E5] rounded-md p-4">
-            {/* Title Section */}
-            <h1 className="text-[20px] sm:text-[24px] md:text-[28px] text-black text-center">
-              Cart Totals
-            </h1>
-
-            {/* Content Section */}
-            <div className="flex flex-col gap-4 sm:gap-6 mt-4">
-              {/* Subtotal */}
-              <div className="flex justify-between">
-                <h2 className="text-[14px] sm:text-[16px]">Subtotal</h2>
-                <h2 className="text-[14px] sm:text-[16px] text-[#9F9F9F]">
-                  Rs. 250,000.00
-                </h2>
-              </div>
-
-              {/* Total */}
-              <div className="flex justify-between">
-                <h2 className="text-[14px] sm:text-[16px]">Total</h2>
-                <h2 className="text-[14px] sm:text-[16px] text-[#9F9F9F]">
-                  Rs. 250,000.00
-                </h2>
-              </div>
-
-              {/* Checkout Button */}
-              <div className="flex justify-center mt-4">
-                <Link
-                  href={"/CheckOut"}
-                  className="flex items-center justify-center text-center w-full sm:w-[200px] md:w-[250px] h-[40px] sm:h-[50px] md:h-[58px] rounded-lg text-sm text-black border-2 border-black hover:bg-black hover:text-white"
-                >
-                  Check Out
-                </Link>
-              </div>
-            </div>
-          </div>
-        </div>
+          ))
+        ) : (
+          <p className="text-gray-600 text-center">Your cart is empty.</p>
+        )}
       </div>
-      <AboveFooter />
-    </>
+
+      {cartItems.length > 0 && (
+        <div className="mt-8 w-full max-w-4xl bg-white p-4 rounded-lg shadow-md">
+          <div className="flex justify-between items-center">
+            <h2 className="text-xl font-semibold">Total:</h2>
+            <p className="text-xl font-bold text-gray-800">
+              ${cartItems.reduce((total, item) => total + item.price * item.inventory, 0).toFixed(2)}
+            </p>
+          </div>
+          <button
+            onClick={() => Swal.fire("Success!", "Your order has been processed!", "success")}
+            className="mt-4 w-full px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600"
+          >
+            Proceed to Checkout
+          </button>
+        </div>
+      )}
+    </div>
   );
 };
-export default page;
+
+export default CartPage;
