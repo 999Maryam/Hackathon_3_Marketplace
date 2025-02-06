@@ -5,7 +5,6 @@ import React, { useEffect, useState } from "react";
 import {
   getCartItems,
   removeFromCart,
-  updateCartQuantity,
 } from "../actions/actions";
 import Image from "next/image";
 import { urlFor } from "@/sanity/lib/image";
@@ -34,11 +33,6 @@ const CartPage = () => {
         Swal.fire("Removed!", "Item has been removed from your cart.", "success");
       }
     });
-  };
-
-  const handleQuantityChange = (id: string, quantity: number) => {
-    updateCartQuantity(id, quantity);
-    setCartItems([...getCartItems()]);
   };
 
   const handleIncrement = (id: string) => {
